@@ -1,0 +1,48 @@
+<config_compilers version="2.0">
+<compiler MACH="BigRed200" COMPILER="intel">
+  <CONFIG_ARGS>
+    <base> --host=Linux </base>
+  </CONFIG_ARGS>
+  <SLIBS>
+    <append> -L$(NETCDF_DIR) -lnetcdff -Wl,--as-needed,-L$(NETCDF_DIR)/lib -lnetcdff -lnetcdf </append>
+  </SLIBS>
+    <CPPDEFS>
+    <append MODEL="gptl"> -DHAVE_SLASHPROC </append>
+  </CPPDEFS>
+  <!-- Bug in the intel/17.0.1 compiler requires this, remove this line when compiler is updated -->
+  <HAS_F2008_CONTIGUOUS>FALSE</HAS_F2008_CONTIGUOUS>
+  <MPICC> cc </MPICC>
+  <MPICXX> CC </MPICXX>
+  <MPIFC> ftn </MPIFC>
+</compiler>
+
+<compiler MACH="BigRed200" COMPILER="gnu">
+  <CONFIG_ARGS>
+    <base> --host=Linux </base>
+  </CONFIG_ARGS>
+  <SLIBS>
+    <append> -L$(NETCDF_DIR) -lnetcdff -Wl,--as-needed,-L$(NETCDF_DIR)/lib -lnetcdff -lnetcdf </append>
+  </SLIBS>
+    <CPPDEFS>
+    <append MODEL="gptl"> -DHAVE_SLASHPROC </append>
+  </CPPDEFS>
+  <MPICC> cc </MPICC>
+  <MPICXX> CC </MPICXX>
+  <MPIFC> ftn </MPIFC>
+<!--
+  <CFLAGS>
+	<append DEBUG="FALSE"> -Ofast </append>
+  </CFLAGS>
+  <CXXFLAGS>
+	<append DEBUG="FALSE"> -Ofast </append>
+  </CXXFLAGS>
+  <FFLAGS> 
+	<append DEBUG="FALSE"> -Ofast </append>
+  </FFLAGS>
+-->
+  <FFLAGS> 
+	<append> -fallow-argument-mismatch -fallow-invalid-boz </append>
+  </FFLAGS>
+</compiler>
+
+</config_compilers>
